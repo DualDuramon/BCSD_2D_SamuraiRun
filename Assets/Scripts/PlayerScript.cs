@@ -69,6 +69,9 @@ public class PlayerScript : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, startPosition, jumpSpeed * Time.deltaTime);
         }
+
+
+        //공격관련
     }
     
     private void OnTriggerEnter2D(Collider2D collision) //플레이어 타격
