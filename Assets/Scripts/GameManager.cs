@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     //싱글톤 적용
     #region instance
     public static GameManager instance;
-    public int Score;
     public PlayerScript playerData;
 
 
@@ -22,6 +21,9 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
     #endregion
+
+    public double nowScore = 0; //현재 점수
+    public double maxScore = 0; //최고기록점수
 
     public float gameSpeed = 1;
     public bool isPlay = false;
@@ -51,6 +53,12 @@ public class GameManager : MonoBehaviour
         onPlay.Invoke(isPlay);
 
         Debug.Log("GameOver");
+        if (nowScore > maxScore) maxScore = nowScore;
+    }
+
+    public void addScore(int score)
+    {
+        nowScore += score;
     }
 
 

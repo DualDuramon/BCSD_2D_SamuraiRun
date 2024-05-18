@@ -1017,6 +1017,37 @@ Transform:
   m_Father: {fileID: 2019870108}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &568656518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568656519}
+  m_Layer: 0
+  m_Name: Attackbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &568656519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568656518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.44, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787099168}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &600869814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,9 +1353,13 @@ MonoBehaviour:
   jumpSpeed: 7
   animator: {fileID: 0}
   HeartText: {fileID: 1179228117}
+  curTime: 0
+  pos: {fileID: 568656519}
+  boxSize: {x: 2.1, y: 3}
   maxHeart: 3
   heart: 3
   isHit: 0
+  atkCoolTime: 0.5
 --- !u!212 &787099167
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1388,7 +1423,8 @@ Transform:
   m_LocalPosition: {x: -3.5, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 568656519}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1772,9 +1808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d364a265d669b24db4f6db51cf67cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 0
   playerData: {fileID: 787099166}
-  gameSpeed: 3
+  nowScore: 0
+  maxScore: 0
+  gameSpeed: 4
   isPlay: 0
   playbtn: {fileID: 1802375916}
 --- !u!4 &1023370721
@@ -3365,6 +3402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobPool: []
   mobs:
+  - {fileID: 2021771524571028908, guid: 81cb445063e5b3a4daa38a56b2756d6a, type: 3}
   - {fileID: 6971712288799992134, guid: 4dca3b04a6586c84aa80ec8986182cde, type: 3}
   - {fileID: 8823874287435008647, guid: dbe1f74df09aabf4081cbd13e3d886d7, type: 3}
   objCount: 5
