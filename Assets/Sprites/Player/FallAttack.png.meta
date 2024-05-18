@@ -1,30 +1,12 @@
 fileFormatVersion: 2
-guid: 1db9a306592ac9545975fcdd51459943
+guid: f1b04b1a064353641a1cce775f3c619f
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 6991849013916550155
-    second: Death_0
-  - first:
-      213: -276728812324164698
-    second: Death_1
-  - first:
-      213: 3156895337291164288
-    second: Death_2
-  - first:
-      213: 1400002288684528572
-    second: Death_3
-  - first:
-      213: -1891625820773287384
-    second: Death_4
-  - first:
-      213: -5789737788129074030
-    second: Death_5
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -80,8 +62,8 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
-  cookieLightType: 1
+  applyGammaDecoding: 0
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -108,42 +90,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Lumin
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -159,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Death_0
+      name: FallAttack2ver2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -173,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1241006749e522e4ca577e075619debd
-      internalID: 6991849013916550155
+      spriteID: d80ae477f0aaf824dad4702a122db5e3
+      internalID: 4393030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_1
+      name: FallAttack2ver2_1
       rect:
         serializedVersion: 2
         x: 200
@@ -194,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1908167410a326f44b9432d96f7dc9f8
-      internalID: -276728812324164698
+      spriteID: 1f3df2ecaedad314080ab5ce0252173d
+      internalID: -173794865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_2
+      name: FallAttack2ver2_2
       rect:
         serializedVersion: 2
         x: 400
@@ -215,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63cc157cdaae30248a03872c5d935403
-      internalID: 3156895337291164288
+      spriteID: 0212a80975f1fc34696f2057b651a6cd
+      internalID: -451317742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_3
+      name: FallAttack2ver2_3
       rect:
         serializedVersion: 2
         x: 600
@@ -236,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3d23ab659547ca4db260cb98c926de9
-      internalID: 1400002288684528572
+      spriteID: 9d106236181828e4f82a68fff78b34aa
+      internalID: 1293699456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_4
+      name: FallAttack2ver2_4
       rect:
         serializedVersion: 2
         x: 800
@@ -257,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a07db581131ff44397cb7950a42ac56
-      internalID: -1891625820773287384
+      spriteID: 862353a7d61a6fc44a6836fa0a8f11a1
+      internalID: 1933554209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_5
+      name: FallAttack2ver2_5
       rect:
         serializedVersion: 2
         x: 1000
@@ -278,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e5a4644edb16d24481daf9370cc9404
-      internalID: -5789737788129074030
+      spriteID: e6d990fc4ed02e849a268d8143457c1f
+      internalID: 1704589747
       vertices: []
       indices: 
       edges: []
@@ -295,12 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Death_1: -276728812324164698
-      Death_5: -5789737788129074030
-      Death_0: 6991849013916550155
-      Death_4: -1891625820773287384
-      Death_2: 3156895337291164288
-      Death_3: 1400002288684528572
+      FallAttack2ver2_1: -173794865
+      FallAttack2ver2_0: 4393030
+      FallAttack2ver2_4: 1933554209
+      FallAttack2ver2_2: -451317742
+      FallAttack2ver2_3: 1293699456
+      FallAttack2ver2_5: 1704589747
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
