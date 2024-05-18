@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class MoveBackground : MonoBehaviour {
 
-
-
 	public float speed;
 	private float x;
-	public float PontoDeDestino;
-	public float PontoOriginal;
+	public float DestinationPoint;
+	public float OriginalPoint;
 
-
-
-
-	// Use this for initialization
 	void Start () {
-		//PontoOriginal = transform.position.x;
+        //OriginalPoint = transform.position.x;
 	}
 	
 	// Update is called once per frame
@@ -29,10 +23,9 @@ public class MoveBackground : MonoBehaviour {
 
 
 
-		if (x <= PontoDeDestino){
-
-			Debug.Log ("hhhh");
-			x = PontoOriginal;
+		if (x <= DestinationPoint)
+        {
+			x = OriginalPoint;
 			transform.position = new Vector3 (x, transform.position.y, transform.position.z);
 		}
 	}
