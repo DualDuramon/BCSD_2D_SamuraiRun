@@ -36,8 +36,10 @@ public class GameManager : MonoBehaviour
         isPlay = true;
         onPlay.Invoke(isPlay);
 
-        playerData.heart = 3;   //플레이어 하트 초기화
+        playerData.heart = playerData.maxHeart;   //플레이어 하트 초기화
         playerData.UpdateHeartAndText();
+
+        playerData.animator.SetBool("isDead",false);   //플레이어 죽는 연출 종료
     }
 
 

@@ -14,16 +14,18 @@ public class PlayerScript : MonoBehaviour
     public float jumpSpeed = 0.0f;      //플레이어 jump 속도
 
     //점프 애니메이션
-    Animator animator;                  //플레이어 애니메이터
     SpriteRenderer spriteRenderer;      //플레이어 스프라이트
+    public Animator animator;                  //플레이어 애니메이터
     public Text HeartText;
 
     //플레이어 스탯
-    public int heart = 3;
+    public int maxHeart = 3;
+    public int heart;
     public bool isHit = false;
 
     void Start()
     {
+        heart = maxHeart;
         startPosition = transform.position;     //jump관련 : 현재 포지션 저장 
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -85,6 +87,7 @@ public class PlayerScript : MonoBehaviour
             else
             {
                 HeartText.text = "Heart : Dead";        //체력갱신
+                animator.SetBool("isDead", true);       //죽는 모션 연출
                 GameManager.instance.GameOver();
             }
 
