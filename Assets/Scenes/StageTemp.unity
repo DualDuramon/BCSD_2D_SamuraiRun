@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 2
   nowJumpSpeed: 0
-  initJumpSpeed: 7
+  initJumpSpeed: 8
   animator: {fileID: 0}
   curTime: 0
   pos: {fileID: 568656519}
