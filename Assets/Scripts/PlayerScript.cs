@@ -88,7 +88,8 @@ public class PlayerScript : MonoBehaviour
                     }
                 }
 
-                   
+
+                
                 //공격
                 animator.SetTrigger("attackTrigger");   //공격모션 출력
                 curTime = atkCoolTime;
@@ -108,7 +109,7 @@ public class PlayerScript : MonoBehaviour
             {
                 isHit = true;
                 StartCoroutine(UnBeatTime());
-                UpdateHeartAndText();
+                GameManager.instance.UpdateHeartText(heart);
                 return;
             }
             else
@@ -119,11 +120,6 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
-    }
-
-    public void UpdateHeartAndText()
-    {
-        HeartText.text = "Heart : " + heart;        //체력갱신
     }
 
     IEnumerator UnBeatTime()    //무적함수 코루틴

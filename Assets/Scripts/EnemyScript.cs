@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class EnemyScript : MonoBehaviour
 {
+    //利 胶湃
     public float EnemySpeed = 0.0f;  //捞悼加档
     public float endPositionX = 0.0f;   //各 昏力 困摹
     public Vector2 StartPosition;       //各 积己 困摹
@@ -57,7 +58,7 @@ public class EnemyScript : MonoBehaviour
         
         if (hp <= 0)  
         {
-            GameManager.instance.addScore(myScore);
+            GameManager.instance.AddScore(myScore);
             gameObject.SetActive(false);
         }
         else

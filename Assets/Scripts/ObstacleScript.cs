@@ -13,6 +13,7 @@ public class ObstacleScript : MonoBehaviour
         transform.position = StartPosition;
 
     }
+
     void Update()
     {
         if (GameManager.instance.isPlay)
