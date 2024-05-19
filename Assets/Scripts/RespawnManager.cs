@@ -77,7 +77,7 @@ public class RespawnManager : MonoBehaviour
         return randomNum;
     }
 
-    GameObject CreateObj(GameObject obj, Transform parent)  //오브젝트 풀링할 때 obj 만드는 함수, parent까지 연결함.
+    GameObject CreateObj(GameObject obj, Transform parent)  //오브젝트 풀링할 때 obj 만드는 함수, 자신에게 연결함.
     {
         GameObject copy = Instantiate(obj);
         copy.transform.SetParent(parent);
