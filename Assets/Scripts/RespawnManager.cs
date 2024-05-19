@@ -6,7 +6,7 @@ public class RespawnManager : MonoBehaviour
 {
     public List<GameObject> mobPool = new List<GameObject>();   //오브젝트풀링
     public GameObject[] mobs;
-    public int objCount = 1;        //최대 수용 몹 오브젝트 수
+    public int objCount = 1;        //종류별 최대 수용 몹 오브젝트 수
 
 
     private void Awake()
@@ -48,19 +48,24 @@ public class RespawnManager : MonoBehaviour
 
     IEnumerator CreateMob()
     {
-        yield return new WaitForSeconds(0.5f);  //약간의 딜레이 넣기
+        yield return new WaitForSeconds(0.5f);  //초반 약간의 딜레이 넣기
 
         while (GameManager.instance.isPlay)
         {
             mobPool[DetectMobs()].SetActive(true);    //랜덤으로 몹 생성(활성화시키기)
-            yield return new WaitForSeconds(Random.Range(1f, 3f));  //랜덤주기로 몹 생성 코루틴 실행
+            if (GameManager.instance.gameSpeed < 7.0f)
+                yield return new WaitForSeconds(Random.Range(1f, 2f));  //랜덤주기로 몹 생성 코루틴 실행
+            else
+                yield return new WaitForSeconds(Random.Range(1f, 1.5f));
         }
     }
 
     int DetectMobs()   //비활성화 된 몹의 idx를 검색후 랜덤으로 하나 반환하는 함수.
     {
+        int maxMobIdx = (int)GameManager.instance.gameSpeed < mobs.Length ? (int)GameManager.instance.gameSpeed : mobs.Length;
+
         List<int> num = new List<int>();
-        for(int i = 0; i< mobPool.Count; i++)
+        for (int i = 0; i < maxMobIdx * objCount; i++) 
         {
             if (!mobPool[i].activeSelf)
             {
