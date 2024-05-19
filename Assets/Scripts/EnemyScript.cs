@@ -53,13 +53,15 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int dmg, bool isSpecialAttack)
     {
-        hp--;
+        hp -= dmg;
         
         if (hp <= 0)  
         {
-            GameManager.instance.AddScore(myScore);
+            if (isSpecialAttack) GameManager.instance.AddScore_from_SpecialAttack(myScore);
+            else GameManager.instance.AddScore(myScore);
+
             gameObject.SetActive(false);
         }
         else

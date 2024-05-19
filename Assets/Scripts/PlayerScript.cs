@@ -23,12 +23,17 @@ public class PlayerScript : MonoBehaviour
     public Transform pos;
     public Vector2 boxSize;
 
+    //필살기 관련
+    public GameObject SpecialAttack_pref;
+
     //플레이어 스탯
     public int maxHeart = 3;
     public int heart;
     public bool isHit = false;
     public float nowAtkCoolTime;
     public float atkCoolTime = 0.3f;    //공격 쿨타임
+    public int specialAtkCount = 0;        //현재 모은 필살기 게이지
+    public int maxSpecialAtkCount = 100;    //필살기 게이지 한도
 
     void Start()
     {
@@ -43,6 +48,7 @@ public class PlayerScript : MonoBehaviour
         heart = maxHeart;
         nowJumpSpeed = initJumpSpeed;
         nowAtkCoolTime = atkCoolTime;
+        specialAtkCount = 0;
     }
 
     void Update()
@@ -63,13 +69,12 @@ public class PlayerScript : MonoBehaviour
 
             transform.position = startPosition;
         }
+
         if (isJump) //jump 할 때
         {
             if (transform.position.y <= jumpHeight - 0.1f && !isTop)
             {
                 transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, jumpHeight), nowJumpSpeed * Time.deltaTime);
-                //transform.position = Vector2.LerpUnclamped(transform.position, new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime);
-
             }
             else
             {
@@ -93,7 +98,7 @@ public class PlayerScript : MonoBehaviour
                 {   //공격 범위 안에 들어온 적들 모두 피격처리
                     if (collider.CompareTag("Enemy"))
                     {
-                        collider.GetComponent<EnemyScript>().TakeDamage();
+                        collider.GetComponent<EnemyScript>().TakeDamage(1, false);
                     }
                 }
 
@@ -102,8 +107,24 @@ public class PlayerScript : MonoBehaviour
                 curTime = nowAtkCoolTime;
             }
         }
-        curTime -= Time.deltaTime;
 
+        //필살기
+        if(Input.GetButtonDown("SpecialAttack") && GameManager.instance.isPlay)
+        {
+            if (curTime < 0 && specialAtkCount == maxSpecialAtkCount)
+            {
+                Instantiate(SpecialAttack_pref, 
+                    new Vector3(transform.position.x + 1.0f, transform.position.y, transform.position.z), 
+                    Quaternion.identity);
+
+                animator.SetTrigger("attackTrigger");   //공격모션 출력
+                curTime = nowAtkCoolTime;
+
+                specialAtkCount = 0;                    //필살기게이지 초기화
+                GameManager.instance.UpdateSpecialAttackBar();  
+            }
+        }
+        curTime -= Time.deltaTime;
     }
 
     
@@ -122,7 +143,6 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                //HeartText.text = "Heart : Dead";        //체력갱신
                 animator.SetBool("isDead", true);       //죽는 모션 연출
                 GameManager.instance.GameOver();
             }
