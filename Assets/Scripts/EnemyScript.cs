@@ -14,8 +14,9 @@ public class EnemyScript : MonoBehaviour
     public int myScore = 100;   //처치 시 얻는 점수
     
     //타격관련
-    Vector2 knockBackPos;   //뒤로 밀려나갈 위치
-    bool isHit;             //넉백중인지 여부
+    Vector2 knockBackPos;           //뒤로 밀려나갈 위치
+    public float knockBackDistance = 1.5f;  //넉백거리
+    bool isHit;                     //넉백중인지 여부
     Animator animator;
 
 
@@ -64,7 +65,7 @@ public class EnemyScript : MonoBehaviour
         else
         {
             isHit = true;
-            knockBackPos = new Vector2(transform.position.x + 1.5f, transform.position.y);  //넉백 포지션
+            knockBackPos = new Vector2(transform.position.x + knockBackDistance, transform.position.y);  //넉백 포지션
             animator.SetTrigger("hitTrigger");  //피격모션 재생
         }
     }
