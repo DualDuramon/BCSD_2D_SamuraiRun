@@ -1439,7 +1439,7 @@ MonoBehaviour:
   maxHeart: 3
   heart: 3
   isHit: 0
-  atkCoolTime: 0.2
+  atkCoolTime: 0.25
 --- !u!212 &787099167
 SpriteRenderer:
   m_ObjectHideFlags: 0
