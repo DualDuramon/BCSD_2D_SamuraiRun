@@ -11,12 +11,12 @@ public class PlayerScript : MonoBehaviour
     private bool isTop = false;                 //플레이어가 최대 높이에 있나 체크 변수
     private Vector2 startPosition;              //플레이어 처음 위치
     public float jumpHeight = 0.0f;            //플레이어 jump 높이
-    public float jumpSpeed = 0.0f;            //플레이어 jump 속도
+    public float nowJumpSpeed = 0.0f;            //플레이어 jump 속도
+    public float initJumpSpeed = 7.0f;
 
     //점프 애니메이션
     SpriteRenderer spriteRenderer;      //플레이어 스프라이트
     public Animator animator;                  //플레이어 애니메이터
-    public Text HeartText;
 
     //공격관련
     [SerializeField] private float curTime;      //공격한 후 몇초 남았나
@@ -27,14 +27,22 @@ public class PlayerScript : MonoBehaviour
     public int maxHeart = 3;
     public int heart;
     public bool isHit = false;
+    public float nowAtkCoolTime;
     public float atkCoolTime = 0.3f;    //공격 쿨타임
 
     void Start()
     {
-        heart = maxHeart;
+        resetAllStats();
         startPosition = transform.position;     //jump관련 : 현재 포지션 저장 
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void resetAllStats()
+    {
+        heart = maxHeart;
+        nowJumpSpeed = initJumpSpeed;
+        nowAtkCoolTime = atkCoolTime;
     }
 
     void Update()
@@ -59,7 +67,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (transform.position.y <= jumpHeight - 0.1f && !isTop)
             {
-                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime);
+                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, jumpHeight), nowJumpSpeed * Time.deltaTime);
                 //transform.position = Vector2.LerpUnclamped(transform.position, new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime);
 
             }
@@ -71,7 +79,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (transform.position.y > startPosition.y && isTop) // jump 후 내려올 때
         {
-            transform.position = Vector2.MoveTowards(transform.position, startPosition, jumpSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, startPosition, nowJumpSpeed * Time.deltaTime);
         }
 
         //공격 관련
@@ -81,25 +89,25 @@ public class PlayerScript : MonoBehaviour
             {
                 Collider2D[] hitColliders = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
 
-                foreach(Collider2D collider in hitColliders){   //공격 범위 안에 들어온 적들 모두 피격처리
+                foreach (Collider2D collider in hitColliders)
+                {   //공격 범위 안에 들어온 적들 모두 피격처리
                     if (collider.CompareTag("Enemy"))
                     {
                         collider.GetComponent<EnemyScript>().TakeDamage();
                     }
                 }
 
-
-                
                 //공격
                 animator.SetTrigger("attackTrigger");   //공격모션 출력
-                curTime = atkCoolTime;
+                curTime = nowAtkCoolTime;
             }
         }
         curTime -= Time.deltaTime;
 
     }
+
     
-    private void OnTriggerEnter2D(Collider2D collision) //플레이어 타격
+    private void OnTriggerEnter2D(Collider2D collision) //플레이어 피격
     {
         if (!isHit && (collision.CompareTag("Mob") || collision.CompareTag("Enemy")))
         {
@@ -114,7 +122,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                HeartText.text = "Heart : Dead";        //체력갱신
+                //HeartText.text = "Heart : Dead";        //체력갱신
                 animator.SetBool("isDead", true);       //죽는 모션 연출
                 GameManager.instance.GameOver();
             }
@@ -145,7 +153,7 @@ public class PlayerScript : MonoBehaviour
         yield return null;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() //공격 히트박스 그리기
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(pos.position, boxSize);
