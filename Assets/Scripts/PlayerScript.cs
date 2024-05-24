@@ -92,19 +92,9 @@ public class PlayerScript : MonoBehaviour
         {
             if (curTime < 0)
             {
-                Collider2D[] hitColliders = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
-
-                foreach (Collider2D collider in hitColliders)
-                {   //공격 범위 안에 들어온 적들 모두 피격처리
-                    if (collider.CompareTag("Enemy"))
-                    {
-                        collider.GetComponent<EnemyScript>().TakeDamage(1, false);
-                    }
-                }
-
                 //공격
                 animator.SetTrigger("attackTrigger");   //공격모션 출력
-                curTime = nowAtkCoolTime;
+                //Attack();
             }
         }
 
@@ -125,6 +115,21 @@ public class PlayerScript : MonoBehaviour
             }
         }
         curTime -= Time.deltaTime;
+    }
+
+    public void Attack()
+    {
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
+
+        foreach (Collider2D collider in hitColliders)
+        {   //공격 범위 안에 들어온 적들 모두 피격처리
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.GetComponent<EnemyScript>().TakeDamage(1, false);
+            }
+        }
+
+        curTime = nowAtkCoolTime;
     }
 
     
