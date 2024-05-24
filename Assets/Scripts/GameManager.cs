@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,11 +27,12 @@ public class GameManager : MonoBehaviour
     public int maxScore = 0; //최고기록점수
     public Slider specialSlider;    //필살기 게이지
     public Text scoreText;
+    public Text maxScoreText;
     public Text HeartText;
 
     public float gameSpeed = 4; //게임 스피드. 기본값 4
     public bool isPlay = false;
-    public GameObject playbtn;
+    public GameObject gameOverPanel;
 
     public delegate void OnPlay(bool isplay);  //RespawnManager의 코루틴 작동
     public OnPlay onPlay;
@@ -38,39 +40,45 @@ public class GameManager : MonoBehaviour
     //플레이어
     public PlayerScript playerData;
 
-    public void PlayButtonClick()
+
+    public void PlayStart()
     {
-        playbtn.SetActive(false);
+        gameOverPanel.SetActive(false);
         isPlay = true;
         onPlay.Invoke(isPlay);
         gameSpeed = 4;
         Time.timeScale = 1.0f;
 
         playerData.resetAllStats();
+        nowScore = 0;
         UpdateHeartText(playerData.heart);
-        UpdateNowScoreText(0);  //점수 초기화
+        UpdateScoreText(0);  //점수 초기화
         UpdateSpecialAttackBar();
 
         playerData.animator.SetBool("isDead",false);   //플레이어 죽는 연출 종료
     }
 
-
     public void GameOver()
     {
         //GameOver
-        playbtn.SetActive(true);
+        gameOverPanel.SetActive(true);
         isPlay = false;
         onPlay.Invoke(isPlay);
 
-        Debug.Log("GameOver");
         if (nowScore > maxScore) maxScore = nowScore;
+        gameOverPanel.GetComponent<GameOverPanelScript>().UpadeScore(nowScore);    //게임오버 패널 점수 텍스트 갱신
+    }
+
+    public void GoTitle()
+    {
+        SceneManager.LoadScene("FirstScreen");
     }
 
 
     public void AddScore(int score) //점수 추가 함수
     {
         nowScore += score;
-        UpdateNowScoreText(nowScore);
+        UpdateScoreText(nowScore);
         if(playerData.specialAtkCount < playerData.maxSpecialAtkCount)  //플레이어 필살기 게이지 적립
         {
             playerData.specialAtkCount += 10;
@@ -90,7 +98,7 @@ public class GameManager : MonoBehaviour
     public void AddScore_from_SpecialAttack(int score)  //필살기로 점수 추가했을 경우
     {
         nowScore += score;
-        UpdateNowScoreText(nowScore);
+        UpdateScoreText(nowScore);
     }
 
     public void UpdateSpecialAttackBar()    //필살기 게이지 업데이트 함수
@@ -104,8 +112,9 @@ public class GameManager : MonoBehaviour
         HeartText.text = "Heart : " + (heart == 0 ? "Dead" : heart);
     }
 
-    public void UpdateNowScoreText(int score) //현재점수갱신
+    public void UpdateScoreText(int score) //점수 텍스트 갱신
     {
-        scoreText.text = "Score : " + score;
+        scoreText.text = $"Score : {score}";
+        maxScoreText.text = $"Max : {maxScore}";
     }
 }
