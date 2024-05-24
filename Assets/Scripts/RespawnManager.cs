@@ -54,9 +54,9 @@ public class RespawnManager : MonoBehaviour
         {
             mobPool[DetectMobs()].SetActive(true);    //罚待栏肺 各 积己(劝己拳矫虐扁)
             if (GameManager.instance.gameSpeed < 7.0f)
-                yield return new WaitForSeconds(Random.Range(1f, 2f));  //罚待林扁肺 各 积己 内风凭 角青
+                yield return new WaitForSeconds(Random.Range(1f, 1.5f));  //罚待林扁肺 各 积己 内风凭 角青
             else
-                yield return new WaitForSeconds(Random.Range(1f, 1.5f));
+                yield return new WaitForSeconds(1.0f);
         }
     }
 

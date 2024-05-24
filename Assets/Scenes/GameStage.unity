@@ -1772,8 +1772,8 @@ MonoBehaviour:
   maxHeart: 3
   heart: 3
   isHit: 0
-  nowAtkCoolTime: 0.25
-  atkCoolTime: 0.25
+  nowAtkCoolTime: 0.2
+  atkCoolTime: 0.2
   specialAtkCount: 100
   maxSpecialAtkCount: 100
 --- !u!212 &787099167

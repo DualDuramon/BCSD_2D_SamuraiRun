@@ -106,6 +106,7 @@ MonoBehaviour:
   hp: 0
   maxHp: 2
   myScore: 400
+  isDead: 0
   knockBackDistance: 4
 --- !u!61 &6722413410385064084
 BoxCollider2D:
