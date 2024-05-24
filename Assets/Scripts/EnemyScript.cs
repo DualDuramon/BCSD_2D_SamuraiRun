@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour
     public int hp;
     public int maxHp = 1;
     public int myScore = 100;   //처치 시 얻는 점수
+    public bool isDead = false;
     
     //타격관련
     Vector2 knockBackPos;           //뒤로 밀려나갈 위치
@@ -28,6 +29,7 @@ public class EnemyScript : MonoBehaviour
     {
         transform.position = StartPosition;
         hp = maxHp;
+        isDead = false;
     }
 
     void Update()
@@ -53,6 +55,14 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) //플레이어와 충돌했을 경우
+    {
+        if (isDead || !collision.CompareTag("Player")) return;
+        
+        collision.gameObject.GetComponent<PlayerScript>().Hit();    //플레이어 피격 재생
+    }
+
+
     public void TakeDamage(int dmg, bool isSpecialAttack)
     {
         hp -= dmg;
@@ -62,7 +72,8 @@ public class EnemyScript : MonoBehaviour
             if (isSpecialAttack) GameManager.instance.AddScore_from_SpecialAttack(myScore);
             else GameManager.instance.AddScore(myScore);
 
-            gameObject.SetActive(false);
+            isDead = true;
+            animator.SetTrigger("deadTrigger");
         }
         else
         {
@@ -72,4 +83,8 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    public void OnDead()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -93,8 +93,7 @@ public class PlayerScript : MonoBehaviour
             if (curTime < 0)
             {
                 //공격
-                animator.SetTrigger("attackTrigger");   //공격모션 출력
-                //Attack();
+                animator.SetTrigger("attackTrigger");   //공격모션 출력 및 공격판정 이벤트(애니메이션에 있음) 실행
             }
         }
 
@@ -132,26 +131,24 @@ public class PlayerScript : MonoBehaviour
         curTime = nowAtkCoolTime;
     }
 
-    
-    private void OnTriggerEnter2D(Collider2D collision) //플레이어 피격
+    public void Hit()   //피격판정 함수
     {
-        if (!isHit && (collision.CompareTag("Mob") || collision.CompareTag("Enemy")))
-        {
-            heart--;
-            
-            if (heart > 0)
-            {
-                isHit = true;
-                StartCoroutine(UnBeatTime());
-            }
-            else
-            {
-                animator.SetBool("isDead", true);       //죽는 모션 연출
-                GameManager.instance.GameOver();
-            }
+        if (isHit) return;
 
-            GameManager.instance.UpdateHeartText(heart);
+        heart--;
+
+        if (heart > 0)
+        {
+            isHit = true;
+            StartCoroutine(UnBeatTime());
         }
+        else
+        {
+            animator.SetBool("isDead", true);       //죽는 모션 연출
+            GameManager.instance.GameOver();
+        }
+
+        GameManager.instance.UpdateHeartText(heart);
     }
 
     IEnumerator UnBeatTime()    //무적함수 코루틴
@@ -162,7 +159,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (countTime % 2 == 0)
             {
-                spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.8f);
+                spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             }
             else
                 spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);

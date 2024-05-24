@@ -27,4 +27,11 @@ public class ObstacleScript : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) //플레이어와 충돌했을 경우
+    {
+        if (!collision.CompareTag("Player")) return;
+
+        collision.gameObject.GetComponent<PlayerScript>().Hit();    //플레이어 피격 재생
+    }
 }
