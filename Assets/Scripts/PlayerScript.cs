@@ -138,8 +138,6 @@ public class PlayerScript : MonoBehaviour
             {
                 isHit = true;
                 StartCoroutine(UnBeatTime());
-                GameManager.instance.UpdateHeartText(heart);
-                return;
             }
             else
             {
@@ -147,6 +145,7 @@ public class PlayerScript : MonoBehaviour
                 GameManager.instance.GameOver();
             }
 
+            GameManager.instance.UpdateHeartText(heart);
         }
     }
 
