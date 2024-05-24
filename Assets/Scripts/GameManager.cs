@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        //GameOver
         gameOverPanel.SetActive(true);
         isPlay = false;
         onPlay.Invoke(isPlay);
@@ -92,7 +91,6 @@ public class GameManager : MonoBehaviour
             playerData.nowAtkCoolTime -= 0.0025f;   //공격속도 증가
                                                     //gameSpeed가 8.0일때까지 증가함.
         }
-
     }
 
     public void AddScore_from_SpecialAttack(int score)  //필살기로 점수 추가했을 경우

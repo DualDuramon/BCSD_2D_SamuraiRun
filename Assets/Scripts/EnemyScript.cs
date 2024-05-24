@@ -20,10 +20,13 @@ public class EnemyScript : MonoBehaviour
     bool isHit;                     //넉백중인지 여부
     Animator animator;
 
+    //사운드 관련
+    SoundSystem mySound;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        mySound = GetComponent<SoundSystem>();
     }
     private void OnEnable()
     {
@@ -81,6 +84,8 @@ public class EnemyScript : MonoBehaviour
             knockBackPos = new Vector2(transform.position.x + knockBackDistance, transform.position.y);  //넉백 포지션
             animator.SetTrigger("hitTrigger");  //피격모션 재생
         }
+
+        mySound.SoundPlay(0);   //피격 사운드 재생
     }
 
     public void OnDead()
