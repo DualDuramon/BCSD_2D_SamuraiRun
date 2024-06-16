@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public float gameSpeed = 4; //게임 스피드. 기본값 4
     public bool isPlay = false;
     public GameObject gameOverPanel;
+    public GameObject subMenuPanel;
 
     public delegate void OnPlay(bool isplay);  //RespawnManager의 코루틴 작동
     public OnPlay onPlay;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     public void PlayStart()
     {
         gameOverPanel.SetActive(false);
+        subMenuPanel.SetActive(false);
         isPlay = true;
         onPlay.Invoke(isPlay);
         resetAll();
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
     public void resetAll()
     {
         gameSpeed = 4;
-
+        Time.timeScale = 1;
         playerData.resetAllStats();
         ScoreManager.instance.nowScore = 0;
         UpdateHeartText(playerData.heart);
@@ -73,6 +75,18 @@ public class GameManager : MonoBehaviour
 
         ScoreManager.instance.UpdateMaxScore(); //최고기록 갱신
         gameOverPanel.GetComponent<GameOverPanelScript>().UpadeScore(ScoreManager.instance.nowScore);    //게임오버 패널 점수 텍스트 갱신
+    }
+
+    public void holdGame()  //게임 일시정지
+    {
+        subMenuPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ContinueGame()  //게임 계속 진행
+    {
+        subMenuPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void GoTitle()
