@@ -119,9 +119,13 @@ public class PlayerScript : MonoBehaviour
                 curTime = nowAtkCoolTime;
             }
         }
-
-
         curTime -= Time.deltaTime;
+
+        if (Input.GetButtonDown("Cancel") && GameManager.instance.isPlay)
+        {
+            //게임 일시정지
+            GameManager.instance.holdGame();
+        }
     }
 
     public void Attack()
