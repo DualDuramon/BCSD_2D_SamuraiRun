@@ -23,9 +23,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     //UI관련
-    public int nowScore = 0; //현재 점수
-    public int maxScore = 0; //최고기록점수
-    public Slider specialSlider;    //필살기 게이지
+    public Slider specialSlider;            //필살기 게이지
     public Text scoreText;
     public Text maxScoreText;
     public Text HeartText;
@@ -40,22 +38,31 @@ public class GameManager : MonoBehaviour
     //플레이어
     public PlayerScript playerData;
 
+    public void Start()
+    {
+        resetAll();
+        playerData.animator.SetBool("isDead", true);
+    }
 
     public void PlayStart()
     {
         gameOverPanel.SetActive(false);
         isPlay = true;
         onPlay.Invoke(isPlay);
+        resetAll();
+    }
+
+    public void resetAll()
+    {
         gameSpeed = 4;
-        Time.timeScale = 1.0f;
 
         playerData.resetAllStats();
-        nowScore = 0;
+        ScoreManager.instance.nowScore = 0;
         UpdateHeartText(playerData.heart);
-        UpdateScoreText(0);  //점수 초기화
+        UpdateScoreText(0);
         UpdateSpecialAttackBar();
 
-        playerData.animator.SetBool("isDead",false);   //플레이어 죽는 연출 종료
+        playerData.animator.SetBool("isDead", false);   //플레이어 죽는 연출 종료
     }
 
     public void GameOver()
@@ -64,8 +71,8 @@ public class GameManager : MonoBehaviour
         isPlay = false;
         onPlay.Invoke(isPlay);
 
-        if (nowScore > maxScore) maxScore = nowScore;
-        gameOverPanel.GetComponent<GameOverPanelScript>().UpadeScore(nowScore);    //게임오버 패널 점수 텍스트 갱신
+        ScoreManager.instance.UpdateMaxScore(); //최고기록 갱신
+        gameOverPanel.GetComponent<GameOverPanelScript>().UpadeScore(ScoreManager.instance.nowScore);    //게임오버 패널 점수 텍스트 갱신
     }
 
     public void GoTitle()
@@ -76,8 +83,8 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int score) //점수 추가 함수
     {
-        nowScore += score;
-        UpdateScoreText(nowScore);
+        ScoreManager.instance.nowScore += score;
+        UpdateScoreText(ScoreManager.instance.nowScore);
         if(playerData.specialAtkCount < playerData.maxSpecialAtkCount)  //플레이어 필살기 게이지 적립
         {
             playerData.specialAtkCount += 10;
@@ -95,8 +102,8 @@ public class GameManager : MonoBehaviour
 
     public void AddScore_from_SpecialAttack(int score)  //필살기로 점수 추가했을 경우
     {
-        nowScore += score;
-        UpdateScoreText(nowScore);
+        ScoreManager.instance.nowScore += score;
+        UpdateScoreText(ScoreManager.instance.nowScore);
     }
 
     public void UpdateSpecialAttackBar()    //필살기 게이지 업데이트 함수
@@ -113,6 +120,6 @@ public class GameManager : MonoBehaviour
     public void UpdateScoreText(int score) //점수 텍스트 갱신
     {
         scoreText.text = $"Score : {score}";
-        maxScoreText.text = $"Max : {maxScore}";
+        maxScoreText.text = $"Max : {ScoreManager.instance.maxScore}";
     }
 }

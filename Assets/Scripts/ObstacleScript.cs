@@ -11,7 +11,6 @@ public class ObstacleScript : MonoBehaviour
     private void OnEnable()
     {
         transform.position = StartPosition;
-
     }
 
     void Update()

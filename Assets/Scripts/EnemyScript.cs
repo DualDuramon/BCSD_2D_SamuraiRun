@@ -69,11 +69,12 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int dmg, bool isSpecialAttack)
     {
         hp -= dmg;
+        if(!isDead)mySound.SoundPlay(0);   //피격 사운드 재생
         
         if (hp <= 0)  
         {
             if (isSpecialAttack) GameManager.instance.AddScore_from_SpecialAttack(myScore);
-            else GameManager.instance.AddScore(myScore);
+            else if(!isDead)GameManager.instance.AddScore(myScore);
 
             isDead = true;
             animator.SetTrigger("deadTrigger");
@@ -85,7 +86,6 @@ public class EnemyScript : MonoBehaviour
             animator.SetTrigger("hitTrigger");  //피격모션 재생
         }
 
-        mySound.SoundPlay(0);   //피격 사운드 재생
     }
 
     public void OnDead()

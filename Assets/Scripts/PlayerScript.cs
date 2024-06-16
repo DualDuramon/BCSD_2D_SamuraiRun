@@ -64,9 +64,10 @@ public class PlayerScript : MonoBehaviour
         //점프 관련
         if (Input.GetButtonDown("Jump") && GameManager.instance.isPlay)
         {
+            if(!isJump) mySound.SoundPlay(2);   //점프사운드 출력
             isJump = true;
             animator.SetBool("isJump", true);
-            mySound.SoundPlay(2);   //점프사운드 출력
+
 
         }
         else if (transform.position.y <= startPosition.y) {

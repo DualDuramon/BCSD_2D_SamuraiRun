@@ -10,7 +10,7 @@ public class GameOverPanelScript : MonoBehaviour
 
     public void UpadeScore(int score)
     {
-        maxScore.text = $"MaxScore : {GameManager.instance.maxScore}";
+        maxScore.text = $"MaxScore : {ScoreManager.instance.maxScore}";
         nowScore.text = $"       Score : {score}";
 
     }
